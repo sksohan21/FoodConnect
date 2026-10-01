@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | FoodConnect</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        Food<span>Connect</span> 🍃
+    </div>
+
+    <a href="/" class="btn btn-primary">
+        Home
+    </a>
+
+</nav>
+
+
+<div class="form-container">
+
+    <h1>Join FoodConnect 🌱</h1>
+
+    <p style="text-align:center; color:#707870; margin-bottom:25px;">
+        Create your account and become part of the solution.
+    </p>
+
+
+    <form method="POST">
+
+        <div class="form-group">
+
+            <label>Your Name / Organization Name</label>
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Email Address</label>
+
+            <input
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Create a password"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Account Type</label>
+
+            <select name="account_type" required>
+
+                <option value="">
+                    Choose account type
+                </option>
+
+                <option value="restaurant">
+                    🏪 Restaurant
+                </option>
+
+                <option value="ngo">
+                    🤝 NGO
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Phone Number</label>
+
+            <input
+                type="text"
+                name="phone"
+                placeholder="Enter phone number">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Address</label>
+
+            <input
+                type="text"
+                name="address"
+                placeholder="Enter address">
+
+        </div>
+
+
+        <button class="btn btn-primary" type="submit">
+            Create Account
+        </button>
+
+    </form>
+
+
+    <p style="text-align:center; margin-top:22px;">
+
+        Already have an account?
+
+        <a href="/login"
+           style="color:#218739; font-weight:bold;">
+            Login
+        </a>
+
+    </p>
+
+</div>
+
+</body>
+</html>

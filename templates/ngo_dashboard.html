@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>NGO Dashboard - FoodConnect</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🍽️ FoodConnect
+        </div>
+
+
+
+          <div class="nav-links">
+    <a href="{{ url_for('ngo_dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('ngo_requests') }}">My Requests</a>
+    <a href="{{ url_for('donation_history') }}">History</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+          </div>
+    
+
+    </nav>
+
+
+    <!-- Main Dashboard -->
+
+    <main class="dashboard-container">
+
+        <div class="dashboard-header">
+
+            <div>
+
+                <h1>
+                    Welcome, {{ name }} 👋
+                </h1>
+
+                <p>
+                    Find available food donations and help people in need.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Available Food -->
+
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Available Food Donations 🍱
+                    </h2>
+
+                    <p>
+                        Food currently available from restaurants.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            {% if donations %}
+
+            <div class="donation-grid">
+
+                {% for donation in donations %}
+
+                <div class="donation-card">
+
+                    <div class="donation-image">
+
+                        {% if donation.food_category == "Rice" %}
+
+                            🍚
+
+                        {% elif donation.food_category == "Biryani" %}
+
+                            🍲
+
+                        {% elif donation.food_category == "Vegetables" %}
+
+                            🥗
+
+                        {% elif donation.food_category == "Chapati" %}
+
+                            🫓
+
+                        {% elif donation.food_category == "Bakery" %}
+
+                            🥐
+
+                        {% else %}
+
+                            🍱
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="donation-content">
+
+                        <span class="status">
+                            {{ donation.status }}
+                        </span>
+
+
+                        <h3>
+                            {{ donation.food_name }}
+                        </h3>
+
+
+                        {% if donation.description %}
+
+                        <p>
+                            {{ donation.description }}
+                        </p>
+
+                        {% endif %}
+
+
+                        <p>
+                            📦 Quantity:
+                            <strong>
+                                {{ donation.quantity }}
+                            </strong>
+                        </p>
+
+
+                        <p>
+                            🍽️ Category:
+                            {{ donation.food_category }}
+                        </p>
+
+
+                        <p>
+                            📍 Pickup Location:
+                            {{ donation.pickup_location }}
+                        </p>
+
+
+                        <p>
+                            ⏰ Available Until:
+                            {{ donation.available_until }}
+                        </p>
+
+<form action="{{ url_for('request_food', donation_id=donation.id) }}"
+      method="POST">
+
+    <input
+        type="text"
+        name="message"
+        placeholder="Optional message"
+    >
+
+    <button type="submit" class="btn-primary">
+        Request Food
+    </button>
+
+</form>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            {% else %}
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    🍽️
+                </div>
+
+                <h3>
+                    No Food Available
+                </h3>
+
+                <p>
+                    There are currently no available food donations.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 FoodConnect |
+            Reducing Food Waste Together 🌱
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Restaurant Dashboard - FoodConnect</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <div class="logo">
+            🍽️ FoodConnect
+        </div>
+
+        <div class="nav-links">
+<div class="nav-links">
+    <a href="{{ url_for('restaurant_dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('post_donation') }}">Post Food</a>
+    <a href="{{ url_for('restaurant_requests') }}">Requests</a>
+    <a href="{{ url_for('donation_history') }}">History</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</div>
+
+</div>
+
+    </nav>
+
+
+    <!-- Dashboard -->
+    <main class="dashboard-container">
+
+        <div class="dashboard-header">
+
+            <div>
+                <h1>Welcome, {{ name }} 👋</h1>
+
+                <p>
+                    Manage your food donations and help reduce food waste.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- Statistics -->
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon">🍱</div>
+
+                <div>
+                    <h3>Total Donations</h3>
+                    <p>{{ total_donations }}</p>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon">📦</div>
+
+                <div>
+                    <h3>Total Quantity</h3>
+                    <p>{{ total_quantity }}</p>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon">❤️</div>
+
+                <div>
+                    <h3>Food Saved</h3>
+                    <p>{{ total_quantity }}</p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Donations -->
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>My Food Donations</h2>
+
+                    <p>
+                        Food items you have posted for donation.
+                    </p>
+                </div>
+
+                <a href="{{ url_for('post_donation') }}"
+                   class="btn-primary">
+                    + Post New Food
+                </a>
+
+            </div>
+
+
+            {% if donations %}
+
+            <div class="donation-grid">
+
+                {% for donation in donations %}
+
+                <div class="donation-card">
+
+                    <div class="donation-image">
+
+                        {% if donation.food_category == "Rice" %}
+                            🍚
+                        {% elif donation.food_category == "Biryani" %}
+                            🍲
+                        {% elif donation.food_category == "Vegetables" %}
+                            🥗
+                        {% elif donation.food_category == "Chapati" %}
+                            🫓
+                        {% elif donation.food_category == "Bakery" %}
+                            🥐
+                        {% else %}
+                            🍱
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="donation-content">
+
+                        <span class="status">
+                            {{ donation.status }}
+                        </span>
+
+                        <h3>
+                            {{ donation.food_name }}
+                        </h3>
+
+
+                        {% if donation.description %}
+
+                        <p>
+                            {{ donation.description }}
+                        </p>
+
+                        {% endif %}
+
+
+                        <p>
+                            📦 Quantity:
+                            <strong>{{ donation.quantity }}</strong>
+                        </p>
+
+
+                        <p>
+                            🍽️ Category:
+                            {{ donation.food_category }}
+                        </p>
+
+
+                        <p>
+                            📍 Location:
+                            {{ donation.pickup_location }}
+                        </p>
+
+
+                        <p>
+                            ⏰ Available Until:
+                            {{ donation.available_until }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    🍽️
+                </div>
+
+                <h3>No Donations Yet</h3>
+
+                <p>
+                    You haven't posted any food donations yet.
+                </p>
+
+                <a href="{{ url_for('post_donation') }}"
+                   class="btn-primary">
+                    Post Your First Donation
+                </a>
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <p>
+            © 2026 FoodConnect | Reducing Food Waste Together 🌱
+        </p>
+
+    </footer>
+
+</body>
+</html>

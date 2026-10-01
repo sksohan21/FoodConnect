@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Donation History - FoodConnect</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        🍽️ FoodConnect
+    </div>
+
+    <div class="nav-links">
+
+        {% if user_type == "restaurant" %}
+
+            <a href="{{ url_for('restaurant_dashboard') }}">
+                Dashboard
+            </a>
+
+            <a href="{{ url_for('post_donation') }}">
+                Post Food
+            </a>
+
+            <a href="{{ url_for('restaurant_requests') }}">
+                Requests
+            </a>
+
+        {% else %}
+
+            <a href="{{ url_for('ngo_dashboard') }}">
+                Dashboard
+            </a>
+
+            <a href="{{ url_for('ngo_requests') }}">
+                My Requests
+            </a>
+
+        {% endif %}
+
+        <a href="{{ url_for('donation_history') }}">
+            History
+        </a>
+
+        <a href="{{ url_for('logout') }}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<main class="dashboard-container">
+
+    <h1>Donation History 📜</h1>
+
+    <p>
+        Track your previous food donations and requests.
+    </p>
+
+
+    {% if history %}
+
+        {% for item in history %}
+
+        <div class="donation-card">
+
+            <div class="donation-content">
+
+                <h2>
+                    🍚 {{ item.food_name }}
+                </h2>
+
+                <p>
+                    📦 Quantity:
+                    <strong>{{ item.quantity }}</strong>
+                </p>
+
+                <p>
+                    🍽️ Category:
+                    {{ item.food_category }}
+                </p>
+
+                <p>
+                    📌 Status:
+                    <strong>{{ item.status }}</strong>
+                </p>
+
+                {% if user_type == "ngo" %}
+
+                <p>
+                    🕐 Requested At:
+                    {{ item.requested_at }}
+                </p>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty-state">
+
+            <h2>No History Found</h2>
+
+            <p>
+                There are no previous donations or requests yet.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</main>
+
+
+<footer class="footer">
+
+    <p>
+        © 2026 FoodConnect 🌱
+    </p>
+</footer>
+
+</body>
+
+</html>

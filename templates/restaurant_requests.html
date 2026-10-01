@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Donation Requests - FoodConnect</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        🍽️ FoodConnect
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('restaurant_dashboard') }}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('post_donation') }}">
+            Post Food
+        </a>
+
+        <a href="{{ url_for('restaurant_requests') }}">
+            Requests
+        </a>
+
+        <a href="{{ url_for('logout') }}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<main class="dashboard-container">
+
+    <h1>Donation Requests 📋</h1>
+
+    <p>
+        Requests received from NGOs.
+    </p>
+
+
+    {% if requests %}
+
+        {% for req in requests %}
+
+        <div class="donation-card">
+
+            <div class="donation-content">
+
+                <h2>
+                    🍚 {{ req.food_name }}
+                </h2>
+
+                <p>
+                    👤 NGO:
+                    <strong>{{ req.ngo_name }}</strong>
+                </p>
+
+                <p>
+                    📧 Email:
+                    {{ req.ngo_email }}
+                </p>
+
+                <p>
+                    📦 Quantity:
+                    {{ req.quantity }}
+                </p>
+
+                <p>
+                    🍽️ Category:
+                    {{ req.food_category }}
+                </p>
+
+                <p>
+                    📌 Request Status:
+                    <strong>{{ req.request_status }}</strong>
+                </p>
+
+
+                {% if req.request_status == "Pending" %}
+
+                <div style="margin-top: 20px;">
+
+                    <form
+                        action="{{ url_for(
+                            'update_request',
+                            request_id=req.request_id,
+                            action='accept'
+                        ) }}"
+                        method="POST"
+                        style="display:inline;">
+
+                        <button type="submit"
+                                class="btn-primary">
+
+                            ✅ Accept
+
+                        </button>
+
+                    </form>
+
+
+                    <form
+                        action="{{ url_for(
+                            'update_request',
+                            request_id=req.request_id,
+                            action='reject'
+                        ) }}"
+                        method="POST"
+                        style="display:inline;">
+
+                        <button type="submit"
+                                class="btn-primary">
+
+                            ❌ Reject
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty-state">
+
+            <h2>
+                No Requests Found
+            </h2>
+
+            <p>
+                No NGO has requested your food yet.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</main>
+
+
+<footer class="footer">
+
+    <p>
+        © 2026 FoodConnect 🌱
+    </p>
+
+</footer>
+
+</body>
+
+</html>

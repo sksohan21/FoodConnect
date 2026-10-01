@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Post Food Donation | FoodConnect</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        Food<span>Connect</span> 🍃
+    </div>
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="/restaurant/dashboard">
+                Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="/logout">
+                Logout
+            </a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+<div class="form-container">
+
+    <h1>Post Food Donation 🍱</h1>
+
+    <p style="text-align:center;
+              color:#707870;
+              margin-bottom:28px;">
+
+        Share your surplus food with an NGO
+        and help reduce food waste.
+
+    </p>
+
+
+    <form method="POST">
+
+
+        <div class="form-group">
+
+            <label>Food Name</label>
+
+            <input
+                type="text"
+                name="food_name"
+                placeholder="Example: Vegetable Rice"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Description</label>
+
+            <textarea
+                name="description"
+                rows="4"
+                placeholder="Describe the food..."></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Quantity</label>
+
+            <input
+                type="number"
+                name="quantity"
+                min="1"
+                placeholder="Example: 20"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Food Category</label>
+
+            <select name="food_category" required>
+
+                <option value="">
+                    Select food category
+                </option>
+
+                <option value="Rice">
+                    🍚 Rice
+                </option>
+
+                <option value="Meals">
+                    🍛 Meals
+                </option>
+
+                <option value="Chapati">
+                    🫓 Chapati
+                </option>
+
+                <option value="Vegetables">
+                    🥗 Vegetables
+                </option>
+
+                <option value="Biryani">
+                    🍲 Biryani
+                </option>
+
+                <option value="Bakery">
+                    🥐 Bakery
+                </option>
+
+                <option value="Other">
+                    🍽️ Other
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Pickup Location</label>
+
+            <input
+                type="text"
+                name="pickup_location"
+                placeholder="Example: Nipani"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Available Until</label>
+
+            <input
+                type="datetime-local"
+                name="available_until"
+                required>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="btn btn-primary">
+
+            Post Donation 🍱
+
+        </button>
+
+    </form>
+
+
+    <p style="text-align:center;
+              margin-top:22px;">
+
+        <a href="/restaurant/dashboard"
+           style="color:#218739;
+                  font-weight:bold;
+                  text-decoration:none;">
+
+            ← Back to Dashboard
+
+        </a>
+
+    </p>
+
+</div>
+
+
+<footer class="footer">
+
+    <div class="footer-content">
+
+        <div>
+
+            <h2>FoodConnect 🍃</h2>
+
+            <p>
+                Turning surplus food into meaningful connections.
+            </p>
+
+        </div>
+
+        <div>
+
+            <p>
+                © 2026 FoodConnect
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+
+</html>

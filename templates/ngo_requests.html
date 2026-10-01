@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Requests - FoodConnect</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        🍽️ FoodConnect
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('ngo_dashboard') }}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('ngo_requests') }}">
+            My Requests
+        </a>
+
+        <a href="{{ url_for('logout') }}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<main class="dashboard-container">
+
+    <h1>My Food Requests 📋</h1>
+
+    <p>Track the food donations you have requested.</p>
+
+
+    {% if requests %}
+
+        {% for req in requests %}
+
+        <div class="donation-card">
+
+            <div class="donation-content">
+
+                <h2>
+                    🍚 {{ req.food_name }}
+                </h2>
+
+                <p>
+                    🏪 Restaurant:
+                    <strong>{{ req.restaurant_name }}</strong>
+                </p>
+
+                <p>
+                    📦 Quantity:
+                    {{ req.quantity }}
+                </p>
+
+                <p>
+                    🍽️ Category:
+                    {{ req.food_category }}
+                </p>
+
+                <p>
+                    📍 Pickup Location:
+                    {{ req.pickup_location }}
+                </p>
+
+                <p>
+                    💬 Message:
+                    {{ req.message or "No message" }}
+                </p>
+
+                <p>
+                    📌 Status:
+                    <strong>{{ req.request_status }}</strong>
+                </p>
+
+                <p>
+                    🕐 Requested At:
+                    {{ req.requested_at }}
+                </p>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty-state">
+
+            <h2>No Requests Yet</h2>
+
+            <p>
+                You have not requested any food donations yet.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</main>
+
+
+<footer class="footer">
+
+    <p>
+        © 2026 FoodConnect 🌱
+    </p>
+
+</footer>
+
+</body>
+
+</html>
